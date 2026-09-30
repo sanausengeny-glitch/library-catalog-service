@@ -51,3 +51,5 @@ Using a real reference is the right choice here because genres are a controlled 
 ## Seed Script
 
 The seed script connects using the `MONGODB_URI` environment variable, clears any existing books and genres, inserts at least four genres and fifteen books, and logs a summary when complete.
+
+This repository is ready to be pushed to GitHub and re-seeded safely whenever a fresh MongoDB database is configured.
