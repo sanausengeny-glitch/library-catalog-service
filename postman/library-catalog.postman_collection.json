@@ -1,0 +1,247 @@
+{
+  "info": {
+    "name": "Library Catalog API",
+    "description": "Collection covering all book and genre endpoints, including validation-error examples.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "library-catalog-service-collection"
+  },
+  "item": [
+    {
+      "name": "Genres",
+      "item": [
+        {
+          "name": "GET /genres",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/genres",
+              "host": ["{{baseUrl}}"],
+              "path": ["genres"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /genres/:id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/genres/{{genreId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["genres", "{{genreId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /genres",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Science Fiction\",\n  \"slug\": \"science-fiction\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/genres",
+              "host": ["{{baseUrl}}"],
+              "path": ["genres"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /genres/:id",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Science Fiction\",\n  \"slug\": \"science-fiction\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/genres/{{genreId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["genres", "{{genreId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /genres/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/genres/{{genreId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["genres", "{{genreId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "GET /books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/books?genre={{genreId}}&search=dune&page=2&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["books"],
+              "query": [
+                {
+                  "key": "genre",
+                  "value": "{{genreId}}"
+                },
+                {
+                  "key": "search",
+                  "value": "dune"
+                },
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /books/:id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/books/{{bookId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["books", "{{bookId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /books",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Dune\",\n  \"author\": \"Frank Herbert\",\n  \"isbn\": \"978-0441172719\",\n  \"description\": \"A sci-fi epic about politics, religion, and survival.\",\n  \"coverImage\": \"https://example.com/dune.jpg\",\n  \"totalCopies\": 10,\n  \"availableCopies\": 7,\n  \"genre\": \"{{genreId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/books",
+              "host": ["{{baseUrl}}"],
+              "path": ["books"]
+            }
+          },
+          "response": [
+            {
+              "name": "400 validation error example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/books",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["books"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"field\": \"title\",\n    \"message\": \"title is required.\"\n  }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "PUT /books/:id",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Dune\",\n  \"author\": \"Frank Herbert\",\n  \"isbn\": \"978-0441172719\",\n  \"description\": \"Updated summary.\",\n  \"coverImage\": \"https://example.com/dune-updated.jpg\",\n  \"totalCopies\": 12,\n  \"availableCopies\": 8,\n  \"genre\": \"{{genreId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/books/{{bookId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["books", "{{bookId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /books/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/books/{{bookId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["books", "{{bookId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "genreId",
+      "value": "64d4f3b9d1a61c8d8f123456",
+      "type": "string"
+    },
+    {
+      "key": "bookId",
+      "value": "64d5f0d7c2148e81f0bb4551",
+      "type": "string"
+    }
+  ]
+}
